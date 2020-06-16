@@ -1,0 +1,37 @@
+{
+  "expo": {
+    "name": "Colombo Times",
+    "slug": "colombo-times-17",
+    "notification": {
+      "icon": "./assets/appicon.png"
+    },
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/appicon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "android": {
+      "googleServicesFile": "./google-services.json",
+      "package": "com.codezone.colombotimes",
+      "versionCode": 1
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "description": ""
+  }
+}
