@@ -153,15 +153,29 @@ export class NewsDetails extends Component {
               />
             </View>
           )}
-          <View style={{ marginTop: 15 }}>
-            <Text style={{ marginHorizontal: 20, fontStyle: "italic" }}>
-              Published in{" "}
-              <Text style={{ color: "blue" }}>
-                {this.props.navigation.getParam("news").newsType}
+          <Row style={{ marginTop: 15 }}>
+            <View>
+              <Text style={{ marginHorizontal: 20, fontStyle: "italic" }}>
+                Published in{" "}
+                <Text style={{ color: "blue" }}>
+                  {this.props.navigation.getParam("news").newsType}
+                </Text>
               </Text>
-            </Text>
-          </View>
+            </View>
+            <View
+              style={{
+                flex: 1,
+                flexDirection: "row-reverse",
+                marginHorizontal: 20,
+              }}
+            >
+              <Text style={{ fontStyle: "italic" }}>
+                {this.props.navigation.getParam("news").dateToDisplay}
+              </Text>
+            </View>
+          </Row>
         </View>
+
         <View style={{ marginHorizontal: 50 }}>
           <FlexImage source={require("../../assets/longLogo.png")} />
         </View>

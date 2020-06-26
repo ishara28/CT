@@ -21,35 +21,30 @@ export class Local extends Component {
   }
 
   getData = () => {
-    firebasedb
-      .ref("/news")
-      .limitToLast(150)
-      .on("value", (querySnapshot) => {
-        let data = querySnapshot.val() ? querySnapshot.val() : {};
-        let newsList = { ...data };
-        let newState = [];
-        let count = 0;
-        for (let news in newsList) {
-          if (newsList[news].newsType == "Local" && count < 46) {
-            count++;
-            newState.push({
-              id: news,
-              header: newsList[news].header,
-              headerImgUrl: newsList[news].headerImgUrl,
-              imagesUrls: newsList[news].imagesUrls,
-              newsType: newsList[news].newsType,
-              newsContent: newsList[news].newsContent,
-              date: newsList[news].date,
-              dateToDisplay: newsList[news].dateToDisplay,
-              videoLink: newsList[news].videoLink,
-            });
-          }
+    firebasedb.ref("/news").on("value", (querySnapshot) => {
+      let data = querySnapshot.val() ? querySnapshot.val() : {};
+      let newsList = { ...data };
+      let newState = [];
+      for (let news in newsList) {
+        if (newsList[news].newsType == "Local") {
+          newState.push({
+            id: news,
+            header: newsList[news].header,
+            headerImgUrl: newsList[news].headerImgUrl,
+            imagesUrls: newsList[news].imagesUrls,
+            newsType: newsList[news].newsType,
+            newsContent: newsList[news].newsContent,
+            date: newsList[news].date,
+            dateToDisplay: newsList[news].dateToDisplay,
+            videoLink: newsList[news].videoLink,
+          });
         }
-        this.setState({
-          newsList: newState,
-          loading: false,
-        });
+      }
+      this.setState({
+        newsList: newState,
+        loading: false,
       });
+    });
   };
 
   refresh = () => {
@@ -65,7 +60,7 @@ export class Local extends Component {
     return (
       <View>
         <FlatList
-          data={copied.reverse()}
+          data={copied.reverse().slice(0, 46)}
           renderItem={({ item }) => (
             <NewsHeading
               news={item}
@@ -122,7 +117,9 @@ export class Local extends Component {
               }}
             >
               <Spinner color="white" />
-              <Text style={{ color: "white" }}>Loading...</Text>
+              <Text style={{ color: "white", fontWeight: "bold" }}>
+                Loading...
+              </Text>
             </Row>
           </View>
         </View>

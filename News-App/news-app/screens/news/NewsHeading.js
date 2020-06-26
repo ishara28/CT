@@ -34,7 +34,7 @@ export class NewsHeading extends React.PureComponent {
           </View>
           <View style={{ flex: 2, justifyContent: "center" }}>
             <Text>
-              ⚫{this.props.news.header.length <= 50 && this.props.news.header}
+              ⚫ {this.props.news.header.length <= 50 && this.props.news.header}
               {this.props.news.header.length > 50 &&
                 this.props.news.header.slice(0, 50) + "..."}
             </Text>

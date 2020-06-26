@@ -27,35 +27,30 @@ export class HotNews extends Component {
   }
 
   getData = () => {
-    firebasedb
-      .ref("/news")
-      .limitToLast(100)
-      .on("value", (querySnapshot) => {
-        let data = querySnapshot.val() ? querySnapshot.val() : {};
-        let newsList = { ...data };
-        let newState = [];
-        let count = 0;
-        for (let news in newsList) {
-          if (newsList[news].isHot == true && count < 10) {
-            count++;
-            newState.push({
-              id: news,
-              header: newsList[news].header,
-              headerImgUrl: newsList[news].headerImgUrl,
-              imagesUrls: newsList[news].imagesUrls,
-              newsType: newsList[news].newsType,
-              newsContent: newsList[news].newsContent,
-              date: newsList[news].date,
-              dateToDisplay: newsList[news].dateToDisplay,
-              videoLink: newsList[news].videoLink,
-            });
-          }
+    firebasedb.ref("/news").on("value", (querySnapshot) => {
+      let data = querySnapshot.val() ? querySnapshot.val() : {};
+      let newsList = { ...data };
+      let newState = [];
+      for (let news in newsList) {
+        if (newsList[news].isHot == true) {
+          newState.push({
+            id: news,
+            header: newsList[news].header,
+            headerImgUrl: newsList[news].headerImgUrl,
+            imagesUrls: newsList[news].imagesUrls,
+            newsType: newsList[news].newsType,
+            newsContent: newsList[news].newsContent,
+            date: newsList[news].date,
+            dateToDisplay: newsList[news].dateToDisplay,
+            videoLink: newsList[news].videoLink,
+          });
         }
-        this.setState({
-          newsList: newState,
-          loading: false,
-        });
+      }
+      this.setState({
+        newsList: newState,
+        loading: false,
       });
+    });
   };
   render() {
     let copied = [...this.state.newsList];
@@ -76,7 +71,7 @@ export class HotNews extends Component {
         </Row>
 
         <FlatList
-          data={copied.reverse()}
+          data={copied.reverse().splice(0, 11)}
           horizontal={true}
           renderItem={({ item }) => (
             <TouchableOpacity

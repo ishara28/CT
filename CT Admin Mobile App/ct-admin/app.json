@@ -1,8 +1,12 @@
 {
   "expo": {
     "name": "CT-Admin",
-    "slug": "ct-admin-2",
-    "platforms": ["ios", "android", "web"],
+    "slug": "ct-admin-3",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/adminappicon.png",
@@ -15,7 +19,9 @@
       "fallbackToCacheTimeout": 0,
       "enabled": false
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
